@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Protegida</title>
+</head>
+<body>
+    <div id="content" style="display: none;">
+        <h1>Bienvenido a la página protegida</h1>
+        <p>¡Has ingresado correctamente!</p>
+    </div>
+    
+    <div id="login">
+        <h1>Ingrese su contraseña</h1>
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="checkPassword()">Ingresar</button>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === 'miContraseñaSegura') {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            } else {
+                alert('Contraseña incorrecta, intente de nuevo.');
+            }
+        }
+    </script>
+</body>
+</html>
+
+<!--Implementar una contraseña para proteger una página web utilizando solo HTML y CSS no es seguro,
+ya que estos lenguajes no pueden manejar la lógica de autenticación de manera efectiva.
+Para una seguridad básica, es necesario utilizar un lenguaje de programación del lado del servidor,
+como JavaScript, PHP, o Python.-->

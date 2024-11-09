@@ -2,8 +2,8 @@
 session_start();
 
 $servername = "localhost";
-$username = "root"; // Reemplaza con tu usuario de base de datos
-$password = ""; // Reemplaza con tu contraseña de base de datos
+$username = "root"; // Cambia esto si tu usuario de base de datos es diferente
+$password = ""; // Cambia esto si tu usuario de base de datos tiene una contraseña
 $dbname = "mi_base_de_datos";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

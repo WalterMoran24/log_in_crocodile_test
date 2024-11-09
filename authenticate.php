@@ -1,20 +1,35 @@
 <?php
 session_start();
 
-// Credenciales de usuario hard-coded (para demostración)
-$correct_username = 'usuario';
-$correct_password = 'contraseña123';
+$servername = "localhost";
+$username = "root"; // Reemplaza con tu usuario de base de datos
+$password = ""; // Reemplaza con tu contraseña de base de datos
+$dbname = "mi_base_de_datos";
 
-// Obtener datos del formulario
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-// Verificar las credenciales
-if ($username === $correct_username && $password === $correct_password) {
-    $_SESSION['authenticated'] = true;
-    header('Location: protected.php');
-    exit();
+$sql = "SELECT * FROM usuarios WHERE usuario='$username'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    if (password_verify($password, $row['contrasena'])) {
+        $_SESSION['authenticated'] = true;
+        header('Location: protected.php');
+        exit();
+    } else {
+        echo "Contraseña incorrecta. <a href='login.html'>Intente de nuevo</a>.";
+    }
 } else {
-    echo "Usuario o contraseña incorrectos. <a href='login.html'>Intente de nuevo</a>.";
+    echo "Usuario no encontrado. <a href='login.html'>Intente de nuevo</a>.";
 }
+
+$conn->close();
 ?>

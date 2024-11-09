@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Protected</title>
+    <title>Página Protegida</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,46 +16,29 @@
         .container {
             text-align: center;
         }
-        #protected-content {
+        #protected-link {
             display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="login">
+    <div class="container">
         <h1>Ingrese su contraseña</h1>
         <input type="password" id="password" placeholder="Contraseña">
         <button onclick="checkPassword()">Ingresar</button>
-    </div>
-    
-    <div id="protected-content">
-        <h2>¡Bienvenido a la página protegida!</h2>
-        <p>Has ingresado correctamente. <a href="pag_protegida.html" onclick="closeSession()">Ir a la página protegida</a></p>
+        <a id="protected-link" href="pagina_protegida.html">Ir a la página protegida</a>
     </div>
 
     <script>
-        // Comprobamos si la sesión ya está iniciada
-        if (sessionStorage.getItem('authenticated')) {
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('protected-content').style.display = 'block';
-        }
-
         function checkPassword() {
             const password = document.getElementById('password').value;
-            if (password === 'cocodrilo') {
-                sessionStorage.setItem('authenticated', true); // Guarda que está autenticado
-                document.getElementById('login').style.display = 'none';
-                document.getElementById('protected-content').style.display = 'block';
+            const protectedLink = document.getElementById('protected-link');
+            if (password === 'miContraseñaSegura') {
+                protectedLink.style.display = 'block';
             } else {
                 alert('Contraseña incorrecta, intente de nuevo.');
             }
         }
-
-        // Agrega un evento para borrar la sesión al cerrar la página
-        window.addEventListener('beforeunload', () => {
-            sessionStorage.removeItem('authenticated');
-        });
-
     </script>
 </body>
 </html>

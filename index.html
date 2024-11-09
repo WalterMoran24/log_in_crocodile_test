@@ -3,42 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Protegida</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            text-align: center;
-        }
-        #protected-link {
-            display: none;
-        }
-    </style>
+    <title>Inicio de Sesión</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Ingrese su contraseña</h1>
-        <input type="password" id="password" placeholder="Contraseña">
-        <button onclick="checkPassword()">Ingresar</button>
-        <a id="protected-link" href="pagina_protegida.html">Ir a la página protegida</a>
-    </div>
-
-    <script>
-        function checkPassword() {
-            const password = document.getElementById('password').value;
-            const protectedLink = document.getElementById('protected-link');
-            if (password === 'Agüita de mar') {
-                protectedLink.style.display = 'block';
-            } else {
-                alert('Contraseña incorrecta, intente de nuevo.');
-            }
-        }
-    </script>
+    <form action="authenticate.php" method="post">
+        <h1>Iniciar Sesión</h1>
+        <input type="text" name="username" placeholder="Usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Ingresar</button>
+    </form>
 </body>
 </html>

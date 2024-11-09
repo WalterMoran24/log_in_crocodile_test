@@ -16,23 +16,49 @@
         .container {
             text-align: center;
         }
+        #protected-content {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="login">
         <h1>Ingrese su contraseña</h1>
         <input type="password" id="password" placeholder="Contraseña">
         <button onclick="checkPassword()">Ingresar</button>
     </div>
+    
+    <div id="protected-content">
+        <h2>¡Bienvenido a la página protegida!</h2>
+        <p>Has ingresado correctamente. <a href="pagina_protegida.html" onclick="closeSession()">Ir a la página protegida</a></p>
+    </div>
 
     <script>
+        // Comprobamos si la sesión ya está iniciada
+        if (sessionStorage.getItem('authenticated')) {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('protected-content').style.display = 'block';
+        }
+
         function checkPassword() {
             const password = document.getElementById('password').value;
-            if (password === 'cocodrilo') {
-                window.location.href = 'https://github.com/WalterMoran24/until_mod_four/blob/0431e3bc7212b0e0c57472b176d281acb4b7f859/index.html';
+            if (password === 'tuContraseñaSegura') {
+                sessionStorage.setItem('authenticated', true); // Guarda que está autenticado
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('protected-content').style.display = 'block';
             } else {
                 alert('Contraseña incorrecta, intente de nuevo.');
             }
+        }
+
+        // Agrega un evento para borrar la sesión al cerrar la página
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.removeItem('authenticated');
+        });
+
+        function closeSession() {
+            sessionStorage.removeItem('authenticated');
+        }
     </script>
 </body>
 </html>
